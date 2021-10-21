@@ -12,17 +12,21 @@ class Clock
     Clock.new(minute: minutes + other.minutes)
   end
 
+  def -@
+    Clock.new(minute: -minutes)
+  end
+
   def -(other)
-    Clock.new(minute: minutes - other.minutes)
+    self + -other
   end
 
   def ==(other)
-    other.class == self.class && other.minutes == minutes
+    other.minutes == minutes
   end
 
   def to_s
     hour, minute = minutes.divmod(MINUTES_PER_HOUR)
-    format('%<hour>02d:%<minute>02d', hour: hour, minute: minute)
+    '%<hour>02i:%<minute>02i' % { hour: hour, minute: minute }
   end
 
   protected

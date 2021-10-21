@@ -1,30 +1,29 @@
 class Bob
-  def initialize(utterance)
-    @utterance = Utterance.new(utterance)
-  end
-
   def self.hey(remark)
     new(remark).respond
   end
 
+  def initialize(utterance)
+    @utterance = Utterance.new(utterance)
+  end
+
   def respond
-    if utterance.silence? then
-      "Fine. Be that way!"
-    elsif utterance.forceful_question? then
-      "Calm down, I know what I'm doing!"
-    elsif utterance.shouting? then
-      "Whoa, chill out!"
-    elsif utterance.question? then
-      "Sure."
+    if utterance.silence?
+      'Fine. Be that way!'
+    elsif utterance.forceful_question?
+      'Calm down, I know what I\'m doing!'
+    elsif utterance.shouting?
+      'Whoa, chill out!'
+    elsif utterance.question?
+      'Sure.'
     else
-      "Whatever."
+      'Whatever.'
     end
   end
 
   private
 
   attr_reader :utterance
-  
 end
 
 class Utterance
@@ -33,7 +32,7 @@ class Utterance
   end
 
   def silence?
-    @utterance.empty?
+    utterance.empty?
   end
 
   def shouting?
@@ -41,7 +40,7 @@ class Utterance
   end
 
   def question?
-    @utterance.rstrip.end_with? '?'
+    utterance.rstrip.end_with? '?'
   end
 
   def forceful_question?
@@ -59,5 +58,4 @@ class Utterance
   def all_uppercase?
     utterance == utterance.upcase
   end
-
 end
